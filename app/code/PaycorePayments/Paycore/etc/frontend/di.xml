@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * PayCore.io Extension for Magento 2
+ *
+ * @author     PayCore.io https://paycore.io
+ * @license    http://www.opensource.org/licenses/mit-license.html  MIT License
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Payment\Model\CcGenericConfigProvider">
+        <arguments>
+            <argument name="methodCodes" xsi:type="array">
+                <item name="paycorepayments_paycore" xsi:type="const">PaycorePayments\Paycore\Model\Payment::METHOD_CODE</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

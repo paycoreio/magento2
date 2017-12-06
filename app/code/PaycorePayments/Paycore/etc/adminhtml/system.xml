@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * PayCore.io Extension for Magento 2
+ *
+ * @author     PayCore.io https://paycore.io
+ * @license    http://www.opensource.org/licenses/mit-license.html  MIT License
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <group id="paycorepayments_paycore" translate="label" type="text" sortOrder="50" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>PayCore.io</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="0">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="test_mode" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="0">
+                    <label>Test Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Title</label>
+                </field>
+                <field id="public_key" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1"
+                       showInStore="0">
+                    <label>Public Key</label>
+                    <comment><![CDATA[Public key from your PayCore.io payment page settings]]></comment>
+                </field>
+                <field id="secret_key" translate="label" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Secret Key</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <comment><![CDATA[Secrete key from your PayCore.io payment page settings]]></comment>
+                </field>
+                <field id="test_public_key" translate="label" type="text" sortOrder="45" showInDefault="1" showInWebsite="1"
+                       showInStore="0">
+                    <label>Test Public Key</label>
+                    <comment><![CDATA[Test public key from your PayCore.io payment page settings]]></comment>
+                    <depends>
+                        <field id="payment/paycorepayments_paycore/test_mode">1</field>
+                    </depends>
+                </field>
+                <field id="test_secret_key" translate="label" type="obscure" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Test Secret Key</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+
+                    <depends>
+                        <field id="payment/paycorepayments_paycore/test_mode">1</field>
+                    </depends>
+                    <comment><![CDATA[Test secret key from your PayCore.io payment page settings
+                        <script type="text/javascript">//<![CDATA[
+                            require(['jquery'], function($){
+                                $('#payment_us_paycorepayments_paycore_test_mode').on('change', function() {
+                                    var testMode = $(this).val();
+                                    var testInputSelectors = ['#row_payment_us_paycorepayments_paycore_test_public_key', '#row_payment_us_paycorepayments_paycore_test_secret_key'];
+                                    var liveInputSelectors = ['#row_payment_us_paycorepayments_paycore_public_key', '#row_payment_us_paycorepayments_paycore_secret_key'];
+
+                                    if (testMode === "0") {
+                                        toggleInputs(testInputSelectors, false);
+                                        toggleInputs(liveInputSelectors, true);
+                                    } else {
+                                        toggleInputs(testInputSelectors, true);
+                                        toggleInputs(liveInputSelectors, false);
+                                    }
+                                }).change();
+                                // flag true to enable
+                                function toggleInputs(selectors, flag) {
+                                    $.each(selectors, function (i, selector) {
+                                        $(selector + ' input').attr('disabled', !flag);
+                                        flag ? $(selector).show() : $(selector).hide();
+                                    })
+                                }
+                            });
+                        </script>]]>
+                    </comment>
+                </field>
+                <field id="allowspecific" translate="label" type="allowspecific" sortOrder="60" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Payment from Applicable Countries</label>
+                    <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                </field>
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="70" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Payment from Specific Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                </field>
+                <field id="description" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Order Description</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

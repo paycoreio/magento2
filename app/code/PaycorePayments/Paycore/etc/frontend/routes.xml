@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * PayCore.io Extension for Magento 2
+ *
+ * @author     PayCore.io https://paycore.io
+ * @license    http://www.opensource.org/licenses/mit-license.html  MIT License
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="paycore" frontName="paycore">
+            <module name="PaycorePayments_Paycore" />
+        </route>
+    </router>
+</config>
